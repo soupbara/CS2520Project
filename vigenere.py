@@ -40,30 +40,26 @@ def encrypt(plaintxt, key):
         k = key
         m = number of characters in key
     '''
-    index = 0
     # the following is an empty string to hold the resulting cipher text
     ciphertxt = ''
     #iterating over every letter in the plaintext
-    for char in plaintxt:
+    for index,char in enumerate(plaintxt):
         if char.isupper():
             #NOTE: no modulus on the index for the key, since we generate a key that is the same size as the message
             #  C[i]   =       p[i]      +         k[i]         % 26 +  adding back the offset
-            ciphertxt += chr((ord(char) + ord(key[index])  )   % 26 +        65)
+            ciphertxt += chr((ord(char) + ord(key[index]) )   % 26 +        65)
+            
             print("is upper " + ciphertxt)
-            index += 1
         elif char.islower():
             #  C[i]   =   p[i]      +         k[i]             % 26    + adding back the offset
             ciphertxt += chr(((ord(char) + ord(key[index])  )   % 26    )+     97)
             print("is lower " + ciphertxt)
             print((ord(char) + ord(key[index]) ) % 26   +         65)
-            index += 1
         elif ord(char) == 32: #for spaces
             ciphertxt += " "
-            index += 1
             continue
         else:
             #the islower() and isupper() should always return FALSE for anything else that is not a letter
-            index += 1
             continue
     return ciphertxt
 
