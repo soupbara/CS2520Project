@@ -17,6 +17,7 @@ def main():
     keyVignere = vigenere.createKey(plaintxt, keyVignere)
     print("key for vignere: ", keyVignere)
     result = vigenere.encrypt(plaintxt, keyVignere)
+    print(keyVignere)
     print(result)
     print(vigenere.decrypt(result, keyVignere))
 
@@ -36,5 +37,5 @@ def test():
             print(cipher)
 
 
-
-main()
+if __name__ == "__main__" :
+    main()

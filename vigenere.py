@@ -45,21 +45,28 @@ def encrypt(plaintxt, key):
     #iterating over every letter in the plaintext
     for index,char in enumerate(plaintxt):
         if char.isupper():
-            #NOTE: no modulus on the index for the key, since we generate a key that is the same size as the message
-            #  C[i]   =       p[i]      +         k[i]         % 26 +  adding back the offset
-            ciphertxt += chr((ord(char) + ord(key[index]) )   % 26 +        65)
-            
-            print("is upper " + ciphertxt)
+            tempP = ord(char) - 65
+            print("plaintext[" + str(index) + "] " + str(tempP))
+            tempK = ord(key[index]) - 65
+            print("key[" + str(index) + "] " + str(tempK))
+            print(((tempP + tempK) % 26))
+            ciphertxt += chr(((tempP + tempK) % 26) + 65)
+            print("Current Cipheretxt: " + ciphertxt)
+
         elif char.islower():
-            #  C[i]   =   p[i]      +         k[i]             % 26    + adding back the offset
-            ciphertxt += chr(((ord(char) + ord(key[index])  )   % 26    )+     97)
-            print("is lower " + ciphertxt)
-            print((ord(char) + ord(key[index]) ) % 26   +         65)
+            tempP = ord(char) - 97
+            print("plaintext[" + str(index) + "] " + str(tempP))
+            tempK = ord(key[index]) - 97
+            print("key[" + str(index) + "] " + str(tempK))
+            print(((tempP + tempK) % 26))
+            ciphertxt += chr(((tempP + tempK) % 26) + 97)
+            print("Current Cipheretxt: " + ciphertxt)
         elif ord(char) == 32: #for spaces
             ciphertxt += " "
             continue
         else:
             #the islower() and isupper() should always return FALSE for anything else that is not a letter
+            ciphertxt += char
             continue
     return ciphertxt
 
@@ -72,7 +79,7 @@ def encrypt(plaintxt, key):
 def decrypt(ciphertxt, key):
     '''
     The decryption method can be represented by the following equation:
-        p[i] = (C[i] + k[i%m])%26
+        p[i] = (C[i] - k[i%m])%26
     Note that the symbol legend is:
         C = cipher text
         p = plain text
@@ -86,7 +93,7 @@ def decrypt(ciphertxt, key):
     for char in ciphertxt:
         if char.isupper():
             #NOTE: no modulus on the index for the key, since we generate a key that is the same size as the message
-            #  C[i]   =    p[i]      +         k[i]         % 26   + adding the offset
+            #  C[i]   =    p[i]      -         k[i]         % 26   + adding the offset
             print((ord(char) - ord(key[index]) ) % 26   +         65)
             plaintxt += chr((ord(char) - ord(key[index]) ) % 26   +         65 ) 
             index += 1
