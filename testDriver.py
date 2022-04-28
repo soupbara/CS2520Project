@@ -1,6 +1,7 @@
 # the following is a user defined module, you can import it similarly to how you've imported other libraries
 import caesarCipher
 import vigenere
+import randomCipher
 
 
 def main():

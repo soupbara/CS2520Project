@@ -1,4 +1,4 @@
-def encode(msg):
+def randEncode(msg):
     '''
             This method requires a message to encrypt, it will return a list 
         with the resulting ciphertext and a set of the letters in a randomized
@@ -13,7 +13,15 @@ def encode(msg):
                     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     key = set(alphabetLower) #same order for ssame run, random seed reset with each program run
     key = list(key)
-    file = 
+    try:
+        keyFile = open("key.txt", "w")
+        tempKey  = " "
+        print(tempKey.join(key))
+        keyFile.write(tempKey.join(key)) 
+        keyFile.close()
+    except:
+        print("error with key file")
+
     ciphertxt = ""
     for char in msg:
         if char.islower():
@@ -30,10 +38,39 @@ def encode(msg):
             ciphertxt += char
             print(ciphertxt)
             continue         
-    print(key)
-
-
-
+    print(str(key))
     return ciphertxt
-print(encode("hello"))
-print(encode("hello"))
+
+def randDecode(cipher, keyFile):
+    '''
+    This method requires the cipher text and its corresponding key that is generated 
+    and written to a file from the randEncode() as a txt file (provide the absolute file path)
+    '''
+    key = []
+    plaintxt = ""
+    try:
+        keyFile = open(keyFile, "r")
+        key = keyFile.readline().split()
+        print(key)
+        keyFile.close()
+    except:
+        print("error with key file")
+    for char in cipher:
+        if char.islower():
+            offset = key.index(char) + 97
+            plaintxt += chr(offset)
+            print("offset =" , offset)
+            print(plaintxt)
+        elif char.isupper():
+            offset = key.index(char) + 65
+            plaintxt += chr(offset)
+            print("offset =" , offset)
+            print(plaintxt)
+        else: #isupper and islower will return false for a character that is not a letter
+            plaintxt += char
+            print(plaintxt)
+            continue        
+        
+cipher = randEncode("banana")
+print(cipher)
+randDecode(cipher, "C:/Users/alexa/Documents/Documents/learning hard/SPRING_2022/CS 2520 Python/key.txt")
