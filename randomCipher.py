@@ -71,6 +71,6 @@ def randDecode(cipher, keyFile):
             print(plaintxt)
             continue        
         
-cipher = randEncode("banana")
-print(cipher)
-randDecode(cipher, "C:/Users/alexa/Documents/Documents/learning hard/SPRING_2022/CS 2520 Python/key.txt")
+# cipher = randEncode("banana")
+# print(cipher)
+# randDecode(cipher, "C:/Users/alexa/Documents/Documents/learning hard/SPRING_2022/CS 2520 Python/key.txt")
