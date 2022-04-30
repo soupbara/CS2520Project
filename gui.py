@@ -5,49 +5,76 @@ import caesarCipher
 import vigenere
 import randomCipher
 
-# class window(Frame) :
-#     def __init__(self) :
-#         tk.Frame.__init__(self)
-#         self.pack()
-#         self.master.title("Crypto Cipher")
-#         self.dropDown = ttk.Combobox(   )
+class window(Frame) :
+    c = ""
+    e = ""
+    inputText = ""
 
-def window():
-    window = tk.Tk()
-    window.title("Crypto Cipher")
-    window.geometry('800x600+50+50')
-    cipherSelection = tk.StringVar()
-    ciphers = ttk.Combobox(window, textvariable=cipherSelection)
-    ciphers ['values'] = ('Caesar Cipher',
-                          'Vignere Cipher',
-                          'Random Cipher')
-    ciphers.grid(column=1,row=10)
+    def __init__(self) :
+        tk.Frame.__init__(self)
+        self.pack()
+        self.master.title("Crypto Cipher")
+        # self.dropDown = ttk.Combobox(   )
+        # self.geometry('800x600+50+50')
+        self.cipherSelection = tk.StringVar()
+        self.ciphers = ttk.Combobox(self, textvariable=self.cipherSelection)
+        self.ciphers ['values'] = ('Caesar Cipher',
+                                   'Vignere Cipher',
+                                   'Random Cipher')
+        self.ciphers.grid(column=1,row=10)
+        self.eD = tk.StringVar()
+        self.encryptDecrypt = ttk.Combobox(self, textvariable=self.eD)
+        self.encryptDecrypt ['values'] = ('Encrypt', 'Decrypt')
+        self.encryptDecrypt.grid(column=2,row=10)
 
-    eD = tk.StringVar()
-    encryptDecrypt = ttk.Combobox(window, textvariable=eD)
-    encryptDecrypt ['values'] = ('Encrypt', 'Decrypt')
-    encryptDecrypt.grid(column=2,row=10)
+        self.inputMsg = tk.Text(self, height=5, width=10)
+        self.inputKey = tk.Text(self, height=5, width=10)
 
-    print(cipherSelection.get())
-    print(eD.get())
 
-    goButton = tk.Button(window, text = "Go!")
-    if cipherSelection.get() == "Caesar Cipher" and eD.get() == "Encrypt":
-        goButton.bind("<Button-1>", caesarCipher.shiftEncrypt("hello", 2))
-        print("we are now here")
-    goButton.grid(column=1,row=15)
+        def getCipher() :
+            self.c = self.ciphers.get()
+            self.e = self.eD.get()
+            if self.c == "Caesar Cipher" and self.e == "Encrypt" :
+                print(caesarCipher.shiftEncrypt("hello", 2))
+            print("we are now here")
+
+        self.goButton = tk.Button(self, text = "Go!", command=getCipher)  
+        self.goButton.grid(column=1,row=15)
+
+# def window():
+#     window = tk.Tk()
+#     window.title("Crypto Cipher")
+#     window.geometry('800x600+50+50')
+#     cipherSelection = tk.StringVar()
+#     ciphers = ttk.Combobox(window, textvariable=cipherSelection)
+#     ciphers ['values'] = ('Caesar Cipher',
+#                           'Vignere Cipher',
+#                           'Random Cipher')
+#     ciphers.grid(column=1,row=10)
+
+#     eD = tk.StringVar()
+#     encryptDecrypt = ttk.Combobox(window, textvariable=eD)
+#     encryptDecrypt ['values'] = ('Encrypt', 'Decrypt')
+#     encryptDecrypt.grid(column=2,row=10)
+
+#     print(cipherSelection.get())
+#     print(eD.get())
+
+#     goButton = tk.Button(window, text = "Go!", command=getCipher(cipherSelection.get(), eD.get()))
+    
+#     goButton.grid(column=1,row=15)
     
         
-    # if cipherSelection == "Caesar Cipher" and eD == "Encrypt":
-    #     goButton = tk.Button(window, text = "Go!", command=caesarCipher.shiftEncrypt("hello", 2))
-    #     goButton.grid(column=1,row=11)
-    #     goButton.place(x=10, y=10)
-    #     goButton.pack()
-    ciphers.current()
-    window.mainloop()
+#     # if cipherSelection == "Caesar Cipher" and eD == "Encrypt":
+#     #     goButton = tk.Button(window, text = "Go!", command=caesarCipher.shiftEncrypt("hello", 2))
+#     #     goButton.grid(column=1,row=11)
+#     #     goButton.place(x=10, y=10)
+#     #     goButton.pack()
+#     ciphers.current()
+#     window.mainloop()
 
 def main() :
-    window()
+    window().mainloop()
 
 if __name__ == '__main__':
     main()
