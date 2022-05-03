@@ -70,7 +70,7 @@ def randDecode(cipher, keyFile):
             plaintxt += char
             print(plaintxt)
             continue        
-        
+    return plaintxt    
 # cipher = randEncode("banana")
 # print(cipher)
 # randDecode(cipher, "C:/Users/alexa/Documents/Documents/learning hard/SPRING_2022/CS 2520 Python/key.txt")

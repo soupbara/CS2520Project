@@ -40,9 +40,42 @@ class window(Frame) :
             e = self.eD.get()
             m = self.inputMsg.get()
             k = self.inputKey.get()
-            if c == "Caesar Cipher" and e == "Encrypt" :
-                print(caesarCipher.shiftEncrypt(m, k))
-                self.result.insert(0, str(caesarCipher.shiftEncrypt(m, k)))
+            if c == "Caesar Cipher" :
+                if e == "Encrypt" :
+                    cipher = caesarCipher.shiftEncrypt(m, k)
+                    print(cipher)
+                    self.result.delete(0, END)
+                    self.result.insert(0, str(cipher))
+                else :
+                    cipher = caesarCipher.shiftDecrypt(m, k)
+                    print(cipher)
+                    self.result.delete(0, END)
+                    self.result.insert(0, str(cipher))
+
+            if c == "Vignere Cipher" :
+                if e == "Encrypt" :
+                    cipher = vigenere.encrypt(m, vigenere.createKey(m, k))
+                    print(cipher)
+                    self.result.delete(0, END)
+                    self.result.insert(0, str(cipher))
+                else :
+                    cipher = vigenere.decrypt(m, vigenere.createKey(m, k))
+                    print(cipher)
+                    self.result.delete(0, END)
+                    self.result.insert(0, str(cipher))
+
+            if c == "Random Cipher" :
+                if e == "Encrypt" :
+                    cipher = randomCipher.randEncode(m)
+                    print(cipher)
+                    self.result.delete(0, END)
+                    self.result.insert(0, str(cipher))
+                else :
+                    fileName = k + ".txt"
+                    cipher = randomCipher.randDecode(m, fileName)
+                    print(cipher)
+                    self.result.delete(0, END)
+                    self.result.insert(0, str(cipher))
 
         self.goButton = tk.Button(self, text = "Go!", command=getCipher)  
         self.goButton.grid(column=1,row=3)
