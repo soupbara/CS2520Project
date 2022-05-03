@@ -21,25 +21,31 @@ class window(Frame) :
         self.ciphers ['values'] = ('Caesar Cipher',
                                    'Vignere Cipher',
                                    'Random Cipher')
-        self.ciphers.grid(column=1,row=10)
+        self.ciphers.grid(column=1, row=1)
         self.eD = tk.StringVar()
         self.encryptDecrypt = ttk.Combobox(self, textvariable=self.eD)
         self.encryptDecrypt ['values'] = ('Encrypt', 'Decrypt')
-        self.encryptDecrypt.grid(column=2,row=10)
+        self.encryptDecrypt.grid(column=1, row=2)
 
-        self.inputMsg = tk.Text(self, height=5, width=10)
-        self.inputKey = tk.Text(self, height=5, width=10)
+        self.inputMsg = tk.Entry(self)
+        self.inputKey = tk.Entry(self)
+        self.result = tk.Entry(self)
 
+        self.inputMsg.grid(column=2, row=1)
+        self.inputKey.grid(column=2, row=2)
+        self.result.grid(column=3, row=2)
 
         def getCipher() :
-            self.c = self.ciphers.get()
-            self.e = self.eD.get()
-            if self.c == "Caesar Cipher" and self.e == "Encrypt" :
-                print(caesarCipher.shiftEncrypt("hello", 2))
-            print("we are now here")
+            c = self.ciphers.get()
+            e = self.eD.get()
+            m = self.inputMsg.get()
+            k = self.inputKey.get()
+            if c == "Caesar Cipher" and e == "Encrypt" :
+                print(caesarCipher.shiftEncrypt(m, k))
+                self.result.insert(0, str(caesarCipher.shiftEncrypt(m, k)))
 
         self.goButton = tk.Button(self, text = "Go!", command=getCipher)  
-        self.goButton.grid(column=1,row=15)
+        self.goButton.grid(column=1,row=3)
 
 # def window():
 #     window = tk.Tk()
