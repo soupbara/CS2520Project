@@ -46,21 +46,13 @@ def encrypt(plaintxt, key):
     for index,char in enumerate(plaintxt):
         if char.isupper():
             tempP = ord(char) - 65
-            print("plaintext[" + str(index) + "] " + str(tempP))
             tempK = ord(key[index]) - 65
-            print("key[" + str(index) + "] " + str(tempK))
-            print(((tempP + tempK) % 26))
             ciphertxt += chr(((tempP + tempK) % 26) + 65)
-            print("Current Cipheretxt: " + ciphertxt)
 
         elif char.islower():
             tempP = ord(char) - 97
-            print("plaintext[" + str(index) + "] " + str(tempP))
             tempK = ord(key[index]) - 97
-            print("key[" + str(index) + "] " + str(tempK))
-            print(((tempP + tempK) % 26))
             ciphertxt += chr(((tempP + tempK) % 26) + 97)
-            print("Current Cipheretxt: " + ciphertxt)
         elif ord(char) == 32: #for spaces
             ciphertxt += " "
             continue
@@ -94,12 +86,10 @@ def decrypt(ciphertxt, key):
         if char.isupper():
             #NOTE: no modulus on the index for the key, since we generate a key that is the same size as the message
             #  C[i]   =    p[i]      -         k[i]         % 26   + adding the offset
-            print((ord(char) - ord(key[index]) ) % 26   +         65)
             plaintxt += chr((ord(char) - ord(key[index]) ) % 26   +         65 ) 
             index += 1
         elif char.islower():
             #  C[i]   =      p[i]       -         k[i%m]    % 26   + adding the offset
-            print((ord(char) - ord(key[index]))  % 26   +         97)
             plaintxt += chr((ord(char) - ord(key[index]))  % 26   +         97 )
             index += 1
         elif ord(char) == 32: #for spaces

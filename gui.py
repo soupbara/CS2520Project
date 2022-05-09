@@ -41,7 +41,7 @@ class window(Frame) :
         self.cipherSelection = tk.StringVar()
         self.ciphers = ttk.Combobox(self, textvariable=self.cipherSelection)
         self.ciphers ['values'] = ('Caesar Cipher',
-                                   'Vignere Cipher',
+                                   'Vigenère Cipher',
                                    'Random Cipher')
         self.ciphers.grid(column=1, row=1, padx=15, pady=1)
         self.eD = tk.StringVar()
@@ -74,7 +74,7 @@ class window(Frame) :
                     self.result.delete(0, END)
                     self.result.insert(0, str(cipher))
 
-            if c == "Vignere Cipher" :
+            if c == "Vigenère Cipher" :
                 if e == "Encrypt" :
                     cipher = vigenere.encrypt(m, vigenere.createKey(m, k))
                     print(cipher)

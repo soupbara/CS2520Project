@@ -11,12 +11,11 @@ def randEncode(msg):
                     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     alphabetUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', \
                     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    key = set(alphabetLower) #same order for ssame run, random seed reset with each program run
+    key = set(alphabetLower) #same order for same run, random seed reset with each program run
     key = list(key)
     try:
         keyFile = open("key.txt", "w")
         tempKey  = " "
-        print(tempKey.join(key))
         keyFile.write(tempKey.join(key)) 
         keyFile.close()
     except:
@@ -27,18 +26,12 @@ def randEncode(msg):
         if char.islower():
             offset = ord(char) - 97
             ciphertxt += key[offset]
-            print("offset =" , offset)
-            print(ciphertxt)
         elif char.isupper():
             offset = ord(char) - 65
             ciphertxt += key[offset]
-            print("offset =" , offset)
-            print(ciphertxt)
         else: #isupper and islower will return false for a character that is not a letter
             ciphertxt += char
-            print(ciphertxt)
             continue         
-    print(str(key))
     return ciphertxt
 
 def randDecode(cipher, keyFile):
@@ -51,7 +44,6 @@ def randDecode(cipher, keyFile):
     try:
         keyFile = open(keyFile, "r")
         key = keyFile.readline().split()
-        print(key)
         keyFile.close()
     except:
         print("error with key file")
@@ -59,16 +51,11 @@ def randDecode(cipher, keyFile):
         if char.islower():
             offset = key.index(char) + 97
             plaintxt += chr(offset)
-            print("offset =" , offset)
-            print(plaintxt)
         elif char.isupper():
             offset = key.index(char) + 65
             plaintxt += chr(offset)
-            print("offset =" , offset)
-            print(plaintxt)
         else: #isupper and islower will return false for a character that is not a letter
             plaintxt += char
-            print(plaintxt)
             continue        
     return plaintxt    
 # cipher = randEncode("banana")
